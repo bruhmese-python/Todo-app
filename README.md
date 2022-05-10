@@ -3,13 +3,13 @@ A todo web-app developed using html, css and django
 
 # Screenshots
 <p align="center">
-  <img src="https://github.com/bruhmese-python/Pdf2booklet/blob/main/src/1.png"/>
-  <img src="https://github.com/bruhmese-python/Pdf2booklet/blob/main/src/2.png"/>
-  <img src="https://github.com/bruhmese-python/Pdf2booklet/blob/main/src/3.png"/>
+  <img src="https://github.com/bruhmese-python/Todo-app/blob/main/1.png"/>
+  <img src="https://github.com/bruhmese-python/Todo-app/blob/main/2.png"/>
+  <img src="https://github.com/bruhmese-python/Todo-app/blob/main/3.png"/>
 </p>
  
 ## Requirements
-- [**Django**](https://poppler.freedesktop.org/)
+- **Django** <br>
    Use `$ pip install django`
 
 ## Usage
