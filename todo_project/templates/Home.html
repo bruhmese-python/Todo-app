@@ -1,0 +1,410 @@
+{% load static %}
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="keywords" content="Todo">
+  <meta name="description" content="">
+  <meta name="page_type" content="np-template-header-footer-from-plugin">
+  <title>Todo</title>
+  <link rel="stylesheet" href="{% static 'nicepage.css' %}" media="screen" type="text/css" />
+  <link rel="stylesheet" href="{% static 'Home.css' %}" media="screen" type="text/css" />
+  <script class="u-script" type="text/javascript" src="{% static 'jquery.js'%}" defer=""></script>
+  <script class="u-script" type="text/javascript" src="{% static 'nicepage.js'%}" defer=""></script>
+  <meta name="generator" content="Nicepage 3.23.2, nicepage.com">
+  <link id="u-theme-google-font" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+  <link id="u-page-google-font" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": ""}
+  </script>
+  <meta name="theme-color" content="#478ac9">
+  <meta property="og:title" content="Home">
+  <meta property="og:type" content="website">
+
+  {% comment %} Icon {% endcomment %}
+  <link rel = "icon" href = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjr4m7wXJZaEl4fTDOiGxLSOlkVQDZCgT_kQ&usqp=CAU" type = "image/x-icon">
+</head>
+
+<style>
+  :root {
+    --tableheight: 500px;
+  }
+
+  .innards {
+    padding-left: 5%;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #C747BE;
+  }
+
+  .body-bg{
+    background: url('https://image.shutterstock.com/image-illustration/colorful-modern-background-futuristic-purple-260nw-628771844.jpg') center center/cover no-repeat padding-box local;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+  }
+</style>
+<style>
+  /* The Modal */
+  .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 5;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+  }
+
+  .u-modal {
+    {% if show_model == 1 %}
+
+    display: block;
+
+    {% else %}
+
+    display: none;
+
+    {% endif %}
+
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 5;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+  }
+  .u-detail {
+    {% if show_detail == 1 %}
+
+    display: block;
+
+    {% else %}
+
+    display: none;
+
+    {% endif %}
+
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 5;
+    /* Sit on top */
+    padding-top: 15%;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+  }
+
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  /* The Close Button */
+  .close {
+    color: #837a7a;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color:#c9477d;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .bg_gradient {
+    background: linear-gradient(90deg, #a847c9 0%, #c947bf 100%);
+  }
+</style>
+
+<body class="u-body body-bg">
+<div style="height:40px">
+</div>
+  <!-- The Create Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close" id="cls">&times;</span>
+      <form method="post" enctype="multipart/form-data" action="save">
+        {% csrf_token %}
+        <div class="rendered-form">
+          <div class="formbuilder-text form-group field-text-1631701594233">
+            <label for="text-1631701594233" class="formbuilder-text-label" style="color: #000;">Name<span
+                class="formbuilder-required">*</span></label>
+            <input type="text" class="form-control" name="name" access="false" id="text-1631701594233"
+              required="required" aria-required="true">
+          </div>
+          <div class="formbuilder-number form-group field-number-1631701599238">
+            <label for="number-1631701599238" class="formbuilder-number-label" style="color: #000;">Priority<span
+                class="formbuilder-required">*</span></label>
+            <input type="number" class="form-control" name="priority" access="false" min="1" id="number-1631701599238"
+              required="required" aria-required="true">
+            <label for="number-163170159923" class="formbuilder-number-label" style="color: #000;">Date<span
+                class="formbuilder-required">*</span></label><br>
+            <input type="date" name="date" id="number-163170159923" required="required" aria-required="true" class="form-control">
+          </div>
+          <div class="formbuilder-button form-group field-button-1631701587618">
+            <button type="submit" class="btn btn-danger btn-lg btn-block" name="button-1631701587618" access="false"
+              style="margin-top: 50px;" id="button-1631701587618">Add</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+
+  <!-- The Update Modal -->
+  <div id="myUpdateModal" class="u-modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <a href="/"><span class="close" id="cls_update">&times;</span></a>
+      <form method="post" enctype="multipart/form-data" action="/update/{{todoid}}">
+        {% csrf_token %}
+        <div class="rendered-form">
+          <div class="formbuilder-text form-group field-text-1631701594233">
+            <label for="text-1631701594233" class="formbuilder-text-label" style="color: #000;">Name<span
+                class="formbuilder-required">*</span></label>
+            <input  value = "{{localtodo.name}}" type="text" class="form-control" name="name" access="false" id="text-1631701594233"
+              required="required" aria-required="true">
+          </div>
+          <div class="formbuilder-number form-group field-number-1631701599238">
+            <label for="number-1631701599238" class="formbuilder-number-label" style="color: #000;">Priority<span
+                class="formbuilder-required">*</span></label>
+            <input value = "{{localtodo.priority}}" type="number" class="form-control" name="priority" access="false" min="1" id="number-1631701599238"
+              required="required" aria-required="true">
+            <label for="number-163170159923" class="formbuilder-number-label" style="color: #000;">Date<span class="formbuilder-required">*</span></label><br>
+            <input type="date" name="date" id="number-163170159923" class="form-control"
+              required="required" aria-required="true">
+
+          </div>
+          <div class="formbuilder-button form-group field-button-1631701587618">
+            <button type="submit" class="btn btn-danger btn-lg btn-block" name="button-1631701587618" access="false" value="update" style="margin-top: 50px;" id="button-1631701587618">Update</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+  
+  <!-- The Detail Modal -->
+  <div id="myUpdateModal" class="u-detail">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <a href="/"><span class="close" id="cls_update">&times;</span></a>
+      <table style="margin:auto;">
+        <tbody>
+          <tr style="width:100%;">
+            <td><label style="float:right"> Name :&nbsp;</label></td>
+            <td>{{todo_task.name}}</td>
+          </tr>
+          <tr>
+            <td><label style="float:right"> Priority :&nbsp;</label></td>
+            <td> {{todo_task.priority}}</td>
+          </tr>
+          <tr>
+            <td><label style="float:right"> Date :&nbsp;</label></td>
+            <td> {{todo_task.date}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Main Content -->
+  <section class="u-clearfix u-section-1" id="sec-a645">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <div class="u-container-style u-custom-color-1 u-expanded-width u-group u-radius-15 u-shape-round u-group-1">
+        <div class="u-container-layout u-container-layout-1 bg_gradient" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+          <h2 class="u-custom-font u-font-raleway u-subtitle u-text u-text-default u-text-1 " style="position: relative;top: 5px;">Todo</h2>
+          <button id="myBtn" class="btn btn-danger"
+            style="font-weight: bold;z-index: 2;float: right;position: relative;right: 50px;bottom: 35px;box-shadow: 9px 5px 43px 0px rgba(0, 0, 0, 0.39);">+
+            Add</button>
+
+
+          <script>
+            // Get the modal
+            var modal = document.getElementById("myModal");
+
+            // Get the button that opens the modal
+            var btn = document.getElementById("myBtn");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementById("cls");
+
+            // When the user clicks the button, open the modal 
+            btn.onclick = function () {
+              modal.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+              modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            }
+
+          </script>
+
+          <div class="u-expanded-width u-shape u-shape-rectangle u-shape-1"></div>
+        </div>
+      </div>
+      <div class="u-custom-color-1 u-expanded-width u-shape u-shape-rectangle u-shape-2 bg_gradient" style="border-left: 1px solid rgba(0, 0, 0, 0.1);border-right: 1px solid rgba(0, 0, 0, 0.1);"></div>
+      <div class="u-custom-color-2 u-expanded-width u-shape u-shape-rectangle u-shape-3"
+        style="box-shadow: 0px -10px 11px 0px #ab47c8 inset;height: var(--tableheight);">
+        <div class="container-fluid" style=" height:var(--tableheight);overflow: auto;width:98%">
+          <div class="row" style="margin-top: 50px;">
+            <div class="col-md-12">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>
+                      S.No
+                    </th>
+                    <th>
+                      Todo Name
+                    </th>
+                    <th>
+                      Priority
+                    </th>
+                    <th>
+                      Date
+                    </th>
+                    <th width="50">
+                    </th>
+                    <th width="50"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for todos in todo %}
+                  <tr>
+                    <td>
+                      {{ forloop.counter }}
+                    </td>
+                    <td>
+                <a href="{% url 'viewdetails' todos.id%}">
+                      {{todos.name}}
+                  </a>
+                    </td>
+                    <td>
+                      {{todos.priority}}
+                    </td>
+                    <td>
+                      {{todos.date}}
+                    </td>
+                    <td>
+                    {% comment %} {% url 'todo_app:details_update' todos.id%} {% endcomment %}
+                      <a href="{% url 'details_update' todos.id%}"><span class="close" style="transform: rotateY(183deg)">&#9998
+                        </span></a>
+                    </td>
+                    <td>
+                      <a href="{% url 'delete' todos.id%}"><span class="close">&#10004</span></a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+
+
+
+</body>
+
+</html>
